@@ -97,6 +97,20 @@ public class NodeManager implements Runnable  {
          System.out.println(num);
           return num;
     }
+     
+    public void updateCapacity(int updateportnum, int updateweightnum){
+        
+        for (Data M : connectedData) {
+            if (M.getPort() == updateportnum) {
+                M.ADDChangeCapacity(Math.abs(updateweightnum));
+                System.out.println("UPDATE CAPACITY2:" + M.getCapactiy());
+                
+            } else {
+                System.out.println("node was not able to update the node capacity using the port: " + updateportnum);
+            }
+        }
+        
+    }
     
      
      //REMOVE THIS FUNCTION
@@ -108,14 +122,7 @@ public class NodeManager implements Runnable  {
         //String host = "localhost" ;
         try{
                            
-            //String message = "REGISTER,node2,102.772.1.20,8000";
-           
-            //DatagramSocket client = new DatagramSocket();
-          //  InetAddress addr = InetAddress.getByName(host);
-          //  DatagramPacket packet11 = new DatagramPacket(messageAll.getBytes(), messageAll.getBytes().length, addr, 4000);    
-          //  client.send(packet11);     
-          
-            //socket.close();
+   
             
             InetAddress addr = InetAddress.getByName(host);
             System.out.println("Sending Ping Request to " + host );

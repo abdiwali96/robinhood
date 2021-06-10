@@ -32,21 +32,27 @@ public class SendbackProcess implements Runnable {
     private int serverportnum;
     private String ServerIpaddr;
     
+    private int Nodeportnumber;
+    
+    
     //Nodemac j = new Nodemac();
 
-    public SendbackProcess(String response, DatagramSocket socketnum, String serverIP , int serverport) {
+    public SendbackProcess(String response, DatagramSocket socketnum, String serverIP , int serverport, int Nodeportnum) {
         messagepack = response;
         socketport = socketnum;
         ServerIpaddr = serverIP;
         serverportnum =  serverport;
-        
+        Nodeportnumber = Nodeportnum;
         
     }
     
     public void ToServerComplete(){
         try {
             //String host = "localhost";
-            String Complete = "JOB COMPLETED";
+            
+            
+            String[] elements = messagepack.trim().split(",");
+            String Complete = "JOB COMPLETED," + Nodeportnumber + "," + elements[5];
              System.out.println("JOB IS COMPLETED..now sending back to server");
             InetAddress addr = InetAddress.getByName(ServerIpaddr);
             

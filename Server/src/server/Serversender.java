@@ -27,6 +27,8 @@ public class Serversender implements Runnable {
     private String host1;
     private LinkedList<String> messageData;
     
+    private String nodename;
+    
     
     public Serversender(LinkedList<Data> connectedTabledata, int RandomNum, String sendermessage, String host,int serverPort) {
         connectedData = connectedTabledata;
@@ -45,28 +47,8 @@ public class Serversender implements Runnable {
 
     }
     
-    /*
-    public Data CapacitySorter() {
-        
-        int port = 0;
-        Data d = null;
-        for (Data M : connectedData) {
-
-            if (M.getCapactiy() > this.max) {
-              //  this.max = M.getCapactiy();
-              //  this.port = M.getPort();
-               // connectedData.get(max).SetCapacity(50);
-               this.max = M.getCapactiy();
-               d = M;
-               
-            }
-
-        }
-        return d;
-
-    }
-*/
     
+
     public void sendMessage() {
 
         //String host = "localhost";
@@ -92,7 +74,7 @@ public class Serversender implements Runnable {
 
                 if (connectedDataNode.getCapactiy() > Biggestnodecap) {
                     Biggestnodecap = connectedDataNode.getCapactiy();
-                    BiggestnodecapIndex = connectedData.indexOf(connectedDataNode);
+                    BiggestnodecapIndex = connectedData.indexOf(connectedDataNode);                   
                     Nodeportnum = connectedDataNode.getPort();
                 }
 
@@ -101,7 +83,7 @@ public class Serversender implements Runnable {
              if (this.MessageCapactiy <= Biggestnodecap) {
               
                  
-               String message = message2send + "," + String.valueOf(this.MessageCapactiy) + "," + host1 + "," + serverPort1;
+               String message = message2send + "," + String.valueOf(this.MessageCapactiy) + "," + host1 + "," + serverPort1 + "," + Nodeportnum + "," + this.MessageCapactiy;
                  
                 DatagramSocket client = new DatagramSocket();
                 InetAddress addr = InetAddress.getByName(host1);

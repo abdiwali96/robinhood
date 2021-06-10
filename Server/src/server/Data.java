@@ -44,6 +44,11 @@ public class Data {
         this.SetCapacity(this.nodeCapactiy + addNum);
     }
     
+    public void ADDChangeCapacity(int addNum) {
+        this.SetCapacity(this.nodeCapactiy + addNum);
+        System.out.println("CAPACITY: " + getCapactiy());
+    }
+    
 
     public String getNodeName(){
         return nodeName;

@@ -39,7 +39,7 @@ public class Nodemac {
 
      
       
-    public void Connect2Server(String message, String serverIP, DatagramSocket socket, int serverport) {
+    public void Connect2Server(String message, String serverIP, DatagramSocket socket, int serverport,int Nodeport) {
         try {
             
             
@@ -53,7 +53,7 @@ public class Nodemac {
             socket.send(packet1);
             //Node2serverping = new NodePings(serverport,socket,serverIP);
             pingThread(socket,serverport,serverIP);
-            listening(socket,Node2serverping, serverIP ,serverport);
+            listening(socket,Node2serverping, serverIP ,serverport, Nodeport);
           // socket.close();
           
           
@@ -70,7 +70,7 @@ public class Nodemac {
     
     //create constructeror
     
-    public void listening(DatagramSocket socket, NodePings Node2serverping , String serverIP , int serverport) {
+    public void listening(DatagramSocket socket, NodePings Node2serverping , String serverIP , int serverport, int Nodeport) {
 
         
         //DatagramSocket server = new DatagramSocket(4160);
@@ -89,9 +89,9 @@ public class Nodemac {
         }
                 String response = new String(p.getData());
                 
-                 
-                System.out.println("Got message: " + response.trim());
-                Sendback = new SendbackProcess(response, socket, serverIP ,serverport);
+                
+                System.out.println("Got message: " + response.trim());               
+                Sendback = new SendbackProcess(response, socket, serverIP ,serverport ,Nodeport);
                       
                   //String []elements = response.trim().split(",");  
                   //this.serverIP = elements[2];
@@ -140,7 +140,7 @@ public class Nodemac {
         try {
             DatagramSocket socket = new DatagramSocket(nodeportArg);
             Nodemac sys = new Nodemac();
-            sys.Connect2Server(message, serverIP, socket,serverport);
+            sys.Connect2Server(message, serverIP, socket,serverport, Nodeport);
             
            
                     

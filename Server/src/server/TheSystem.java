@@ -142,10 +142,13 @@ public class TheSystem {
                     case "JOB COMPLETED":
 
                         System.out.println("JOB IS DONE!");
+                        int updateportnum = Integer.parseInt(elements[1]);
+                        int updateweightnum = Integer.parseInt(elements[2]);
+                        manager.updateCapacity(updateportnum,updateweightnum);
                         //you need make the true boolean to false to close the port
 
                         break;
-                    case "Sender":
+                    case "SENDER":
 
                         System.out.println("MESSAGE CAME");
                         sendermessage = elements[1];
