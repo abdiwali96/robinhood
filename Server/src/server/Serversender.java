@@ -25,14 +25,16 @@ public class Serversender implements Runnable {
     private int port = 0;
     private int serverPort1;
     private String host1;
+    private LinkedList<String> messageData;
     
     
-    public Serversender(LinkedList<Data> Tabledata, int RandomNum, String sendermessage, String host,int serverPort) {
-        connectedData = Tabledata;
+    public Serversender(LinkedList<Data> connectedTabledata, int RandomNum, String sendermessage, String host,int serverPort) {
+        connectedData = connectedTabledata;
         MessageCapactiy = RandomNum;
         message2send = sendermessage;
         serverPort1 = serverPort;
         host1 = host;
+        //this.messageData = messageData;
     }
     
     
@@ -82,6 +84,9 @@ public class Serversender implements Runnable {
                 int Nodeportnum = 0;
                 int Biggestnodecap = 0;
                 int BiggestnodecapIndex = 0;
+                
+                System.out.println("SIZE: " + connectedData.size());
+                
 
             for (Data connectedDataNode : connectedData) {
 
