@@ -14,7 +14,6 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author soab
@@ -24,74 +23,60 @@ public class SendbackProcess implements Runnable {
     private String messagepack;
     private String text;
     private int timeWait;
-    //private int socketport;
+
     private DatagramSocket socketport;
-    
-    
-     private boolean scan = true ;
+
+    private boolean scan = true;
     private int serverportnum;
     private String ServerIpaddr;
-    
-    private int Nodeportnumber;
-    
-    
-    //Nodemac j = new Nodemac();
 
-    public SendbackProcess(String response, DatagramSocket socketnum, String serverIP , int serverport, int Nodeportnum) {
+    private int Nodeportnumber;
+
+    //Nodemac j = new Nodemac();
+    public SendbackProcess(String response, DatagramSocket socketnum, String serverIP, int serverport, int Nodeportnum) {
         messagepack = response;
         socketport = socketnum;
         ServerIpaddr = serverIP;
-        serverportnum =  serverport;
+        serverportnum = serverport;
         Nodeportnumber = Nodeportnum;
-        
+
     }
-    
-    public void ToServerComplete(){
+
+    public void ToServerComplete() {
         try {
-            //String host = "localhost";
-            
-            
+
             String[] elements = messagepack.trim().split(",");
             String Complete = "JOB COMPLETED," + Nodeportnumber + "," + elements[5];
-             System.out.println("JOB IS COMPLETED..now sending back to server");
+            System.out.println("JOB IS COMPLETED..now sending back to server");
             InetAddress addr = InetAddress.getByName(ServerIpaddr);
-            
-           
+
             DatagramPacket packet1 = new DatagramPacket(Complete.getBytes(), Complete.getBytes().length, addr, serverportnum);
-          
+
             this.socketport.send(packet1);
-            
-            //this.socket.close();
+
         } catch (Exception error) {
-          
+
         }
     }
+
     
-    public void Pingsys() {
-        
-        String messageAll = "HI EVERYONE";
- 
-    }
 
     @Override
     public void run() {
 
-        
         try {
-            
-            
-            
+
             String[] elements = this.messagepack.trim().split(",");
-            String text = elements[0];  
+            String text = elements[0];
             int timeWait = Integer.parseInt(elements[1]);
             System.out.println("Currently working on your message..it  will take " + elements[1] + " Seconds");
-            
-            Thread.sleep(timeWait*1000);
+
+            Thread.sleep(timeWait * 1000);
             ToServerComplete();
-            
+
         } catch (InterruptedException ex) {
             Logger.getLogger(SendbackProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 }

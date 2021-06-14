@@ -13,51 +13,41 @@ import java.net.InetAddress;
  * @author soab
  */
 public class NodePings implements Runnable {
- 
-    private boolean scan = true ;
+
+    private boolean scan = true;
     private int serverport;
-     private DatagramSocket socketport;
-     private String ServerIpaddr;
-    
+    private DatagramSocket socketport;
+    private String ServerIpaddr;
+
     public NodePings(int server, DatagramSocket socketnum, String serverIP) {
         serverport = server;
         socketport = socketnum;
         ServerIpaddr = serverIP;
-              
+
     }
-    
-    
+
     @Override
     public void run() {
-        
-        
-        String messageAll = "HI EVERYONE - Pinging from Node to Server";
- 
-        
-        try{
-                          
-            
+
+        try {
+
             InetAddress addr = InetAddress.getByName(ServerIpaddr);
-            System.out.println("Sending Ping to Server" );
-            
-             
-            while (scan == true){  
-                if(addr.isReachable(2000)){
-               System.out.println("Server is available");
-               
-               
-               
-                }else {
+            System.out.println("Sending Ping to Server");
+
+            while (scan == true) {
+                if (addr.isReachable(2000)) {
+                    System.out.println("Server is available");
+
+                } else {
                     System.out.println("Server is NOT reachable");
                     socketport.close();
-                    //change obejct atrr to False
-                } Thread.sleep(1000);
+                    
+                }
+                Thread.sleep(1000);
             }
-                
-  
-           
-        } catch (Exception error){
-            
+
+        } catch (Exception error) {
+
         }
     }
 }

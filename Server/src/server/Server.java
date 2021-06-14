@@ -8,19 +8,10 @@ package server;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-/**
- *
- * @author soab
- */
 public class Server {
 
-    
-    
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+   
         
         String message = args[0];
         String[] argElements = args[0].trim().split(",");
